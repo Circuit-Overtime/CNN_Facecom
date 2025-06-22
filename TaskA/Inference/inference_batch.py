@@ -8,7 +8,7 @@ import time
 # Load the trained model
 model = load_model("models/keras/mobilenet_gender_final_v2.keras")
 
-IMG_WIDTH, IMG_HEIGHT = 224, 224  # Adjust if needed
+IMG_WIDTH, IMG_HEIGHT = 224, 224
 labels = ["Male", "Female"]
 
 def predict_image(image_path):

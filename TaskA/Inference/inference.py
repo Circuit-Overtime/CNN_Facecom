@@ -7,10 +7,10 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-# ========== Configuration ==========
+
 MODEL_PATH = 'models/final_gender_classifier_balanced.pt'
 IMG_SIZE = 96
-NUM_SAMPLES = 12  # per class
+NUM_SAMPLES = 12  
 DATA_PATHS = {
     'Male': ['Data/Task_A/train/male', 'Data/Task_A/val/male'],
     'Female': ['Data/Task_A/train/female', 'Data/Task_A/val/female']
