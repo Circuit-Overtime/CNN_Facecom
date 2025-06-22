@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing.image import img_to_array # type: ignore
 
 # ========== Configuration ==========
 model_path = "models/gender_classifier_final.h5"
-image_size = (250, 250)  # same as training
+image_size = (224, 224)  # same as training
 
 # ========== Load the trained model ==========
 model = load_model(model_path)
