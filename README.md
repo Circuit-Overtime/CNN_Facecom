@@ -7,6 +7,7 @@
 ###  Task A: Gender Classification
 - **Objective:** Predict the gender (male/female) of a person from face images captured in difficult lighting/weather conditions.
 - **Dataset Structure:**
+```
 dataset/
 ├── train/
 │ ├── male/ # 1532 images
@@ -14,7 +15,7 @@ dataset/
 └── val/
 ├── male/ # 317 images
 └── female/ # 105 images
-
+```
 - **Model Goal:** Train a binary classifier that is accurate, fair, and generalizes well on distorted or real-world images.
 
 ---
@@ -22,7 +23,7 @@ dataset/
 ###  Task B: Face Matching (Face Verification)
 - **Objective:** Match distorted face images to the correct identity folder using embeddings, **not** classification.
 - **Dataset Structure:**
-- 
+```
 dataset/
 ├── identities/
 │ ├── person_001/
@@ -34,7 +35,7 @@ dataset/
 │ ├── person_002/
 │ │ └── ...
 │ └── ... (total: 877 identity folders)
-
+```
 
 - **Model Goal:** Learn a similarity-based system that embeds faces such that:
 - Similar identities are **close in embedding space**
@@ -43,7 +44,7 @@ dataset/
 ---
 
 ##  Folder Structure (Repo)
-
+```
 ├── dataset/ # Not included in repo; user-supplied
 ├── models/ # Pretrained weights (.pt or .h5)
 ├── utils/
@@ -52,7 +53,7 @@ dataset/
 ├── inference.py # Runs on test data and returns metrics
 ├── requirements.txt # Dependencies
 └── README.md # Project explanation and usage guide
-
+```
 
 
 ---
