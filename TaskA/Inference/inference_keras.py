@@ -5,7 +5,7 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input # type: 
 from tensorflow.keras.preprocessing.image import img_to_array # type: ignore
 
 # ========== Configuration ==========
-model_path = "models/gender_classifier_final.h5"
+model_path = "models/keras/gender_classifier_final.h5"
 image_size = (224, 224)  # same as training
 
 # ========== Load the trained model ==========
@@ -37,5 +37,5 @@ def predict_gender(image_path: str) -> str:
 # ========== Example usage ==========
 if __name__ == "__main__":
     # Replace this with your test image path
-    test_image_path = r"E:\CNN_vedic\Data\Task_A\TESTING\women\133.jpg"
+    test_image_path = r"E:\CNN_vedic\Data\Task_A\TESTING\unseen\face_31.jpg"
     predict_gender(test_image_path)
