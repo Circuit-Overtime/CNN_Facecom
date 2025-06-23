@@ -27,7 +27,7 @@ SAVE_PATH = "models/triplet/resnet50_triplet_model.h5"
 # ======= Triplet Loss =======
 def triplet_loss(margin=MARGIN):
     def _loss(y_true, y_pred):
-        anchor, positive, negative = y_pred[:, :128], y_pred[:, 128:256], y_pred[:, 256:]
+        anchor, positive, negative = y_pred[:, :256], y_pred[:, 256:512], y_pred[:, 512:]
         pos_dist = tf.reduce_sum(tf.square(anchor - positive), axis=1)
         neg_dist = tf.reduce_sum(tf.square(anchor - negative), axis=1)
         basic_loss = pos_dist - neg_dist + margin
@@ -39,13 +39,14 @@ def create_embedding_model():
     base = ResNet50(weights='imagenet', include_top=False, input_shape=INPUT_SHAPE)
     base.trainable = False
     x = GlobalAveragePooling2D()(base.output)
-    x = Dense(128)(x)
+    x = Dense(256)(x)
     x = Lambda(lambda x: tf.math.l2_normalize(x, axis=1))(x)
-    return Model(inputs=base.input, outputs=x)
+    embedding_model = Model(inputs=base.input, outputs=x)
+    return embedding_model, base
 
 # ======= Triplet Model =======
 def build_triplet_model():
-    embedding_model = create_embedding_model()
+    embedding_model, base = create_embedding_model()
     input_anchor = Input(shape=INPUT_SHAPE, name='anchor')
     input_positive = Input(shape=INPUT_SHAPE, name='positive')
     input_negative = Input(shape=INPUT_SHAPE, name='negative')
@@ -57,7 +58,8 @@ def build_triplet_model():
     merged_output = tf.keras.layers.concatenate([emb_anchor, emb_positive, emb_negative])
     model = Model(inputs=[input_anchor, input_positive, input_negative], outputs=merged_output)
     model.compile(optimizer='adam', loss=triplet_loss())
-    return model, embedding_model
+    return model, embedding_model, base
+
 
 # ======= Augmented Image Processing =======
 def preprocess_image(img_path):
@@ -106,7 +108,7 @@ def generate_triplets(data_dir, batch_size=BATCH_SIZE):
             np.array(anchor_batch).astype(np.float32),
             np.array(positive_batch).astype(np.float32),
             np.array(negative_batch).astype(np.float32)
-        ), np.zeros((batch_size, 384), dtype=np.float32)
+        ), np.zeros((batch_size, 768), dtype=np.float32)
 
 # ======= Dataset Wrapper =======
 def wrap_generator(data_dir):
@@ -116,7 +118,7 @@ def wrap_generator(data_dir):
             tf.TensorSpec(shape=(None, *INPUT_SHAPE), dtype=tf.float32),
             tf.TensorSpec(shape=(None, *INPUT_SHAPE), dtype=tf.float32),
         ),
-        tf.TensorSpec(shape=(None, 384), dtype=tf.float32),
+        tf.TensorSpec(shape=(None, 768), dtype=tf.float32),
     )
     return tf.data.Dataset.from_generator(
         lambda: generate_triplets(data_dir, BATCH_SIZE),
@@ -124,7 +126,7 @@ def wrap_generator(data_dir):
     )
 
 # ======= Training =======
-model, embedding_model = build_triplet_model()
+model, embedding_model, base_cnn = build_triplet_model()
 train_dataset = wrap_generator(TRAIN_DIR)
 val_dataset = wrap_generator(VAL_DIR)
 
@@ -138,9 +140,10 @@ model.fit(
 )
 
 # Optional: Unfreeze top layers of ResNet50 and fine-tune
-embedding_model.get_layer('resnet50').trainable = True
-for layer in embedding_model.get_layer('resnet50').layers[:-10]:
+base_cnn.trainable = True
+for layer in base_cnn.layers[:-10]:
     layer.trainable = False
+
 model.compile(optimizer='adam', loss=triplet_loss())
 model.fit(train_dataset, steps_per_epoch=250, epochs=5)
 
