@@ -6,13 +6,16 @@ import matplotlib.cm as cm
 from tensorflow.keras.models import load_model #type: ignore
 from tensorflow.keras.applications.vgg19 import preprocess_input #type: ignore
 from tensorflow.keras.preprocessing.image import img_to_array #type: ignore
+import os 
 
 # ========== Config ==========
-MODEL_PATH = "models/final_vgg19_gender_model.h5"
-IMAGE_PATH = "PRODUCTION/Task_A/test/male/ayush1.png"  
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  
+
+MODEL_PATH = "PRODUCTION/models/vgg19_final_epoch.h5"
+IMAGE_PATH = "PRODUCTION/Task_A/test/female/5.png"  
 IMAGE_SIZE = (224, 224)
 CLASS_NAMES = ["Male", "Female"]
-THRESHOLD = 0.40  
+THRESHOLD = 0.45 
 # =========== FOCAL LOSS ==========
 def focal_loss(gamma=2., alpha=0.5):
     def loss(y_true, y_pred):
@@ -99,7 +102,11 @@ def predict_gender(image_path):
     confidence = female_prob if predicted_class == 1 else 1 - female_prob
     print(f"🧠 Prediction: {label} ({confidence * 100:.2f}%)")
 
-    gradcam_visualize(image_path, model, class_index=predicted_class)
+    # Only show Grad-CAM if GPU is available
+    if tf.config.list_physical_devices('GPU'):
+        gradcam_visualize(image_path, model, class_index=predicted_class)
+    else:
+        print("⚠️ Grad-CAM visualization skipped (no GPU detected).")
 
 # ========== Run ==========
 if __name__ == "__main__":
