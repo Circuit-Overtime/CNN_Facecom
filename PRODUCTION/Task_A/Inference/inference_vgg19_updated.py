@@ -8,11 +8,16 @@ from tensorflow.keras.applications.vgg19 import preprocess_input #type: ignore
 from tensorflow.keras.preprocessing.image import img_to_array #type: ignore
 import os 
 
+'''
+Please put the model named "vgg19_final_epoch.h5" in the PRODUCTION/models directory.
+The model can be found at the release of this repository 
+https://github.com/Circuit-Overtime/CNN_vedic/releases/tag/publish102
+'''
 # ========== Config ==========
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  
 
 MODEL_PATH = "PRODUCTION/models/vgg19_final_epoch.h5"
-IMAGE_PATH = "PRODUCTION/Task_A/test/female/5.png"  
+IMAGE_PATH = "PRODUCTION/Task_A/test/male/0.png"  
 IMAGE_SIZE = (224, 224)
 CLASS_NAMES = ["Male", "Female"]
 THRESHOLD = 0.45 
