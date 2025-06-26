@@ -162,40 +162,26 @@ This project addresses two core computer vision tasks:
 ## 📦 Requirements
 
 ### CPU Environment
-
-- **Python**: 3.11 or higher
-- **TensorFlow**: Latest (CPU version)
-- **Keras**
-- **scikit-learn**
-- **OpenCV**
-- **matplotlib**
-- **tqdm**
-
 Install with:
 ```bash
-pip install tensorflow keras scikit-learn opencv-python matplotlib tqdm
+pip install -r requirements.txt
 ```
 
 ---
 
 ### GPU Environment
 
-- **Python**: 3.10 (required)
-- **TensorFlow**: 2.9.0 (GPU version)
-- **Keras**
-- **scikit-learn**
-- **OpenCV**
-- **matplotlib**
-- **tqdm**
-- **CUDA Toolkit**: 11.8
-- **cuDNN**: 8.6.0
-- **NVIDIA GPU**: RTX series (6GB+ VRAM recommended)
 
 Install with:
 ```bash
-pip install tensorflow==2.9.0 keras scikit-learn opencv-python matplotlib tqdm
+pip install -r requirements_GPU.txt
 ```
-> Ensure CUDA 11.8 and cuDNN 8.6.0 are installed and properly configured for GPU support.
+OR 
+```
+conda env create -f facecom_env.yml
+```
+Check [Runtime](RUNTIME.md) File to get detailed steps on 100% reproducable inference smoothly 
+> Ensure CUDA 11.8 and cuDNN 8.6.0 are installed and properly configured for GPU support (only if you are accessing the training scripts)
 
 ---
 
