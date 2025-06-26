@@ -131,7 +131,10 @@ This project addresses two core computer vision tasks:
 
 ## 📈 GRAD-CAM Result Showcase (Male and Female)
 
-
+- MALE
+![image](https://github.com/user-attachments/assets/904ee8fb-3639-4fc9-8f4e-3b0fc16b17c7)
+- FEMALE
+![image](https://github.com/user-attachments/assets/64504ab4-e58b-4f34-9e57-2495e16e8b04)
 
 ## 📊 Results
 
