@@ -9,7 +9,7 @@ from tensorflow.keras.preprocessing.image import img_to_array #type: ignore
 
 # ========== Config ==========
 MODEL_PATH = "models/final_vgg19_gender_model.h5"
-IMAGE_PATH = "Data/Task_A/TESTING/unseen/hritik2.jpg"  
+IMAGE_PATH = "PRODUCTION/Task_A/test/male/ayush1.png"  
 IMAGE_SIZE = (224, 224)
 CLASS_NAMES = ["Male", "Female"]
 THRESHOLD = 0.40  
