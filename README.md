@@ -2,6 +2,8 @@
 
 A robust deep learning pipeline for **gender classification** and **face verification** under challenging, real-world conditions, inspired by Vedic principles of fairness and accuracy.
 
+![Elixpo_Generated (2)](https://github.com/user-attachments/assets/3e38c081-8576-419b-9503-37adcd2bb9b4)
+
 ---
 
 ## 📂 Repository Structure
@@ -21,7 +23,9 @@ CNN_vedic/
 ├── Data/                     # (Git-ignored) Training/validation/test data
 ├── TASK.md                   # Challenge description & dataset structure
 └── README.md                 # (You are here)
-
+├── app/                      # Contains the server.py for the flask server inference
+├── index.html                # frontend entry to check inference using a GUI
+```
 ---
 
 ## 🚀 Project Overview
