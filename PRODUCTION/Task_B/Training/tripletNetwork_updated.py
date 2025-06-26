@@ -18,7 +18,7 @@ BATCH_SIZE = 16
 EPOCHS = 25
 TRAIN_DIR = "Data/Task_B/train"
 VAL_DIR = "Data/Task_B/val"
-SAVE_PATH = "models/triplet/resnet50_triplet_model.h5"
+SAVE_PATH = "PRODUCTION/models/tripletNetwork.h5"
 
 # ======= Triplet Loss =======
 def triplet_loss(margin=MARGIN):

@@ -2,7 +2,7 @@ import tensorflow as tf
 
 # Load the full triplet model (do NOT compile because of custom loss)
 triplet_model = tf.keras.models.load_model(
-    "models/triplet/resnet50_triplet_model.h5",
+    "PRODUCTION/models/tripletNetwork.h5",
     compile=False  # Skip compiling to avoid needing the custom triplet loss
 )
 
@@ -14,7 +14,7 @@ for layer in triplet_model.layers:
         break
 
 if embedding_model:
-    embedding_model.save("models/triplet/embedding_model_updated.h5")
+    embedding_model.save("PRODUCTION/models/embedding_sequel.h5")
     print("✅ Saved embedding_model.h5 successfully.")
 else:
     print("❌ Embedding model not found in triplet_model.")
