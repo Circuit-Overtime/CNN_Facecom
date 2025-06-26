@@ -14,7 +14,7 @@ for layer in triplet_model.layers:
         break
 
 if embedding_model:
-    embedding_model.save("models/triplet/embedding_model.h5")
+    embedding_model.save("models/triplet/embedding_model_updated.h5")
     print("✅ Saved embedding_model.h5 successfully.")
 else:
     print("❌ Embedding model not found in triplet_model.")

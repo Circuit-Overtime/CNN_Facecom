@@ -1,0 +1,23 @@
+📊 Final evaluation on validation data...
+20/20 [==============================] - 6s 209ms/step
+🔍 Best Threshold: 0.40 | F1 Score: 0.9684
+📋 Classification Report:
+              precision    recall  f1-score   support
+
+        Male       0.97      0.97      0.97       317
+      Female       0.97      0.97      0.97       317
+
+    accuracy                           0.97       634
+   macro avg       0.97      0.97      0.97       634
+weighted avg       0.97      0.97      0.97       634
+
+🧮 Confusion Matrix:
+[[308   9]
+ [ 11 306]]
+✅ Overall Accuracy: 0.9685
+🎯 Precision: 0.9714
+📈 Recall: 0.9653
+🧠 F1 Score: 0.9684
+♂️ Male Accuracy: 0.9716
+♀️ Female Accuracy: 0.9653
+✅ Final model saved as models/vgg19_final_epoch.h5

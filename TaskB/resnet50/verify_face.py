@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array  # type:
 # ======= Configuration =======
 EMBEDDING_MODEL_PATH = "models/triplet/embedding_model.h5"
 # THRESHOLD = 1.0870  # Obtained from compute_threshold()
-THRESHOLD = 0.88  # Adjusted threshold for verification
+THRESHOLD = 0.83  # Adjusted threshold for verification
 IMG_SIZE = (224, 224)
 
 # ======= Load Embedding Model =======
@@ -35,8 +35,8 @@ def is_match(reference_path, test_path, threshold=THRESHOLD):
 
 # ======= Example Usage =======
 if __name__ == "__main__":
-    reference_img = r"E:\CNN_vedic\Data\Task_A\TESTING\unseen\pichai1.png"
-    test_img = r"E:\CNN_vedic\Data\Task_A\TESTING\unseen\pichai2.png"
+    reference_img = r"E:\CNN_vedic\Data\Task_A\TESTING\unseen\trey1.png"
+    test_img = r"E:\CNN_vedic\Data\Task_A\TESTING\unseen\trey2.png"
 
     if is_match(reference_img, test_img):
         print("✅ MATCH: Same identity")

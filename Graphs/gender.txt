@@ -1,0 +1,55 @@
+📊 Evaluating model on validation set...
+20/20 [==============================] - 8s 128ms/step
+
+📋 Classification Report:
+              precision    recall  f1-score   support
+
+        Male       0.87      0.98      0.92       317
+      Female       0.98      0.85      0.91       317
+
+    accuracy                           0.92       634
+   macro avg       0.92      0.92      0.92       634
+weighted avg       0.92      0.92      0.92       634
+
+🧮 Confusion Matrix:
+[[311   6]
+ [ 46 271]]
+
+✅ Overall Accuracy: 0.9180
+🎯 Precision: 0.9783
+📈 Recall: 0.8549
+🧠 F1 Score: 0.9125
+♂️ Male Accuracy: 0.9811
+♀️ Female Accuracy: 0.8549
+✅ Final model saved at models
+final_gender_model.h5
+
+
+
+
+
+📊 Final evaluation on validation data...
+20/20 [==============================] - 5s 205ms/step
+📋 Classification Report:
+              precision    recall  f1-score   support
+
+        Male       0.95      0.99      0.97       317
+      Female       0.99      0.94      0.96       317
+
+    accuracy                           0.97       634
+   macro avg       0.97      0.97      0.97       634
+weighted avg       0.97      0.97      0.97       634
+
+🧮 Confusion Matrix:
+[[313   4]
+ [ 18 299]]
+✅ Overall Accuracy: 0.9653
+🎯 Precision: 0.9868
+📈 Recall: 0.9432
+🧠 F1 Score: 0.9645
+♂️ Male Accuracy: 0.9874
+♀️ Female Accuracy: 0.9432
+✅ Final model saved as models/final_vgg19_gender_model.h5
+
+
+
