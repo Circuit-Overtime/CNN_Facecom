@@ -9,10 +9,9 @@ RUN apt-get update && apt-get install -y python3.10 python3-pip && \
 # Copy requirements and install
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements_GPU.txt
 
 # Copy source code
 COPY . .
 
-# Default command
-CMD ["python", "PRODUCTION/Task_A/inference/inference_vgg19_updated.py"]
+
