@@ -4,7 +4,7 @@ from tensorflow.keras.models import load_model  # type: ignore
 from tensorflow.keras.preprocessing.image import load_img, img_to_array  # type: ignore
 
 # ======= Configuration =======
-EMBEDDING_MODEL_PATH = "models/triplet/embedding_sequel.h5"
+EMBEDDING_MODEL_PATH = "PRODUCTION/models/embedding_sequel.h5"
 THRESHOLD = 0.945  
 IMG_SIZE = (224, 224)
 
