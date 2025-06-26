@@ -9,18 +9,18 @@ A robust deep learning pipeline for **gender classification** and **face verific
 ```
 CNN_vedic/
 ├── PRODUCTION/
-│   ├── Task_A/           # Gender classification (VGG19-based)
-│   │   ├── training/     # Training scripts, logs, plots
-│   │   └── inference/    # Inference & Grad-CAM scripts
-│   ├── Task_B/           # Face verification (Triplet Network)
-│   │   ├── training/     # Triplet model training, embedding extraction
-│   │   └── inference/    # Face matching demo
-│   └── models/           # Saved production models (.h5)
-├── [DEPRECATED MODELS]/  # Old/experimental models & scripts
-├── Data/                 # (Git-ignored) Training/validation/test data
-├── Task.md               # Challenge description & dataset structure
-└── README.md             # (You are here)
-```
+│   ├── Task_A/               # Gender classification (VGG19-based)
+│   │   ├── training/         # Training scripts, logs, plots
+│   │   ├── inference/        # Inference & Grad-CAM scripts
+│   │   └── test/             # Test images for inference
+│   ├── Task_B/               # Face verification (Triplet Network)
+│   │   ├── training/         # Triplet model training, embedding extraction
+│   │   ├── inference/        # Face matching demo
+│   │   └── test/             # Test/reference images for verification
+├── [DEPRECATED MODELS]/      # Old/experimental models & scripts
+├── Data/                     # (Git-ignored) Training/validation/test data
+├── TASK.md                   # Challenge description & dataset structure
+└── README.md                 # (You are here)
 
 ---
 
@@ -93,7 +93,7 @@ This project addresses two core computer vision tasks:
 - **Train:**  
     Run `PRODUCTION/Task_A/training/train_vgg19_updated.py` (requires data in `Data/Task_A/`).
 - **Inference:**  
-    Place test image in `PRODUCTION/Task_A/test/`, run `inference/inference_vgg19_updated.py`.
+    Place test image in `PRODUCTION/Task_A/test/`, run `PRODUCTION/Task_B/inference/inference_vgg19_updated.py`.
 - **Model:**  
     Download `vgg19_final_epoch.h5` from [releases](https://github.com/Circuit-Overtime/CNN_vedic/releases/tag/publish102).
 
@@ -103,7 +103,7 @@ This project addresses two core computer vision tasks:
 - **Extract Embedding Model:**  
     Run `embedding_model_extract.py` after training.
 - **Inference:**  
-    Place reference/test images, run `inference/verify_face.py`.
+    Place reference/test images, run `PRODUCTION/Task_B/inference/verify_face.py`.
 - **Model:**  
     Download `embedding_sequel.h5` from [releases](https://github.com/Circuit-Overtime/CNN_vedic/releases/tag/publish101).
 

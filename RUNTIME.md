@@ -82,8 +82,8 @@ To run the model on GPU (TensorFlow 2.9.0 + Python 3.10), you can use our GPU Do
 
 3. **Run inference inside the container**:
     ```bash
-    docker compose run facecom python inference_taskA.py
-    docker compose run facecom python inference_taskB.py
+    docker compose run facecom python PRODUCTION/Task_B/inference/inference_vgg19_updated.py
+    docker compose run facecom python PRODUCTION/Task_B/inference/verify_face.py
     ```
 
 ---
