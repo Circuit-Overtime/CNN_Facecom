@@ -1,16 +1,58 @@
 # 🧩 Project Runtime Instructions
 
-This guide explains how to run the project on both **CPU** and **GPU** environments. The project includes pretrained models for both Task A (Gender Classification) and Task B (Face Verification), so training is not required.
+This guide explains how to run the project on both **CPU** and **GPU** environments. The project includes pretrained models for both Task A (Gender Classification) and Task B (Face Verification), so **training is not required**.
 
 ---
 
-## 🧠 Default: CPU Runtime (Recommended for Most Users)
 
-You can run the inference and evaluation scripts using your local CPU. No GPU is required.
+## 🧬 Conda Environment (Recommended)
+
+For guaranteed reproducibility across systems, we provide a ready-to-use Conda environment file directly in this repository.
+
+### 🔧 Setup Instructions (CPU/GPU Compatible)
+
+1. **Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html)** if you haven't already.
+
+   - ✅ During installation, **check the box to add Conda to your PATH**.
+   - ✅ After installing, open a new terminal and run:
+     ```bash
+     conda init powershell  # or conda init bash/zsh depending on your shell
+     ```
+   - ✅ Restart the terminal to apply changes.
+
+2. **Create the Conda environment from the included YAML file**:
+   ```bash
+   conda env create -f facecom_env.yml
+   ```
+
+3. **Activate the Environment**
+    ```bash
+    conda activate facecom
+    ```
+
+4. **Run inference For Gender Prediction**:
+    ```bash
+    python PRODUCTION/Task_A/inference/inference_vgg19_updated.py
+    ```
+5. **Run inference For Face Classification**:
+    ```bash
+    python PRODUCTION/Task_B/inference/verify_face.py
+    ```
+6. **Deactivate the Environment**
+    ```bash
+    conda deactivate
+    ```
+
+---
+
+
+## 🧠 Default: CPU Runtime (Easy but may not be optimal in terms of results)
+
+You can run inference and evaluation scripts using your local **CPU**. No GPU is required.
 
 ### ✅ Requirements
 
-- Python **3.10**
+- Python **3.10+**
 - `requirements.txt` (already provided)
 
 ### ⚙️ Setup Instructions
@@ -29,93 +71,113 @@ You can run the inference and evaluation scripts using your local CPU. No GPU is
 
 3. **Run Inference / Evaluation**:
     ```bash
-    python PRODUCTION\Task_A\inference\inference_vgg19_updated.py
-    python PRODUCTION\Task_B\inference\verify_face.py
+    python PRODUCTION/Task_A/inference/inference_vgg19_updated.py
+    python PRODUCTION/Task_B/inference/verify_face.py
     ```
 
-> 📝 This will use CPU by default and works on most systems without CUDA or GPU drivers.
+> ✅ CPU mode works by default on all systems. You don’t need to install CUDA or cuDNN.
 
 ---
 
-## 🚀 Advanced: GPU Runtime via Docker (CUDA 11.8 + cuDNN 8.6)
+## 🖥️ Running the Web API & GUI
 
-To run the model on GPU (TensorFlow 2.9.0 + Python 3.10), you can use our GPU Docker environment.
+You can use the provided Flask server and web interface for an interactive experience (supports both CPU and GPU, depending on your environment):
+
+### 1. **Start the Flask API server**
+
+With your Conda environment activated (see above), run:
+
+```bash
+python app/server.py
+```
+
+- This will start the API at `http://127.0.0.1:5000/`.
+- The server will automatically use GPU if available and supported by your environment.
+
+### 2. **Use the Web GUI**
+
+Open `index.html` in your browser (double-click or use a local web server).
+
+- The GUI allows you to upload images for gender classification and face verification.
+- Make sure the Flask server is running before using the GUI.
+
+> **Note:** If accessing from another device or over a network, adjust the API endpoint URLs in `index.html` accordingly.
+
+---
+
+## 🚀 Advanced: GPU Runtime via Docker (CUDA 11.8 + cuDNN 8.6) {Optional}
+
+To run on GPU using **Docker**, a preconfigured runtime is provided.
 
 ### ✅ GPU Runtime Requirements
 
-- A system with an NVIDIA GPU (Ampere/Volta/Turing preferred)
+- An NVIDIA GPU with driver version **≥ 515**
 - Installed:
 
   | Tool                     | Version        |
   |--------------------------|----------------|
   | Docker                   | Latest         |
-  | NVIDIA GPU Driver        | ≥ 515.x        |
   | NVIDIA Container Toolkit | [Install Guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) |
-  
-> ⚠️ No need to install CUDA or cuDNN manually — they are included in the Docker image.
+
+> ⚠️ No need to install CUDA/cuDNN locally — they're included in the container image.
 
 ---
 
-### 🧱 GPU Environment Details
+### 🧱 GPU Environment Specs
 
 | Component      | Version     |
 |----------------|-------------|
 | Python         | 3.10        |
 | TensorFlow     | 2.9.0       |
+| NumPy          | 1.23.5      |
 | CUDA           | 11.8        |
 | cuDNN          | 8.6         |
 | Base Image     | `nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04` |
 
 ---
 
-### 📦 Build & Run with Docker
+### 🐳 Run with Docker Compose
 
-1. **Test your NVIDIA GPU with Docker**:
+1. **Verify GPU support**:
     ```bash
     docker run --rm --gpus all nvidia/cuda:11.8.0-base nvidia-smi
     ```
 
-2. **Build the container**:
+2. **Build and start the container**:
     ```bash
     docker compose -f docker-compose.yml up --build
     ```
 
-3. **Run inference inside the container**:
+3. **Run a specific script in the container**:
     ```bash
-    docker compose run facecom python PRODUCTION/Task_B/inference/inference_vgg19_updated.py
+    docker compose run facecom python PRODUCTION/Task_A/inference/inference_vgg19_updated.py
     docker compose run facecom python PRODUCTION/Task_B/inference/verify_face.py
     ```
 
 ---
 
-### 🛠 Alternative: Manual GPU Setup (Not Recommended)
+## 🧾 Files Provided
 
-If you wish to run on GPU *without Docker*, ensure:
-
-- Python == **3.10**
-- TensorFlow == **2.9.0**
-- CUDA 11.8 and cuDNN 8.6 are installed **and correctly configured**.
-
-> See [TensorFlow GPU Setup Guide](https://www.tensorflow.org/install/pip#windows-native) for details.
-
----
-
-## ✅ Files Provided
-
-| File                     | Description                                       |
-|--------------------------|---------------------------------------------------|
-| `requirements.txt`       | CPU runtime dependencies                         |
-| `requirements_GPU.txt`   | GPU runtime dependencies (TensorFlow 2.9.0, etc.)|
-| `Dockerfile.gpu`         | Custom Dockerfile with GPU setup                 |
-| `docker-compose.yml`     | Compose config to run in GPU container           |
-| `inference_taskA.py`     | Gender classification inference script (Task A)  |
-| `inference_taskB.py`     | Face verification inference script (Task B)      |
-| `RUNTIME.md`             | You are here                                     |
+| File                     | Description                                        |
+|--------------------------|----------------------------------------------------|
+| `requirements.txt`       | CPU-only dependencies                             |
+| `requirements_GPU.txt`   | GPU-specific dependencies (TF 2.9.0, NumPy 1.23.5) |
+| `env/facecom_gpu.yml`    | Conda YAML for reproducible GPU runtime           |
+| `Dockerfile.gpu`         | Docker setup for GPU                              |
+| `docker-compose.yml`     | Docker Compose to run GPU containers              |
+| `app/server.py`          | Flask API server for GUI/web usage                |
+| `index.html`             | Web GUI for gender and face verification          |
+| `inference_vgg19_updated.py` | Gender classification (Task A)              |
+| `verify_face.py`         | Face matching (Task B)                             |
+| `RUNTIME.md`             | This file                                          |
 
 ---
 
-### 📬 Need Help?
+## 🆘 Need Help?
 
-Please open an issue on the GitHub repo or contact the maintainer.
+If you're stuck or unsure how to proceed:
+
+- Open an issue in the GitHub repository.
+- Contact the project maintainer with logs and system info.
 
 ---
