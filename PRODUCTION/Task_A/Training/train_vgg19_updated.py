@@ -129,8 +129,8 @@ model.compile(optimizer=Adam(learning_rate=LR), loss=loss_fn, metrics=["accuracy
 callbacks = [
     EarlyStopping(patience=10, restore_best_weights=True, verbose=1),
     ReduceLROnPlateau(factor=0.1, patience=5, min_lr=1e-6, verbose=1),
-    ModelCheckpoint("models/vgg19_train.h5", save_best_only=True, monitor="val_accuracy", mode="max", verbose=1),
-    PeriodicModelSaver("models/periodic_vgg19_gender_model", every_n_epochs=10)
+    ModelCheckpoint("PRODUCTION/models/vgg19_train.h5", save_best_only=True, monitor="val_accuracy", mode="max", verbose=1),
+    PeriodicModelSaver("PRODUCTION/models/periodic_vgg19_gender_model", every_n_epochs=10)
 ]
 
 # ================== Training ==================
@@ -203,7 +203,7 @@ plt.xlabel("Epochs")
 plt.ylabel("Accuracy / Loss")
 plt.legend()
 plt.grid()
-plt.savefig("plots/vgg19_training_history.png")
+plt.savefig("PRODUCTION/Task_A/training/vgg19_training_history.png")
 plt.show()
 # ================== Plot Fine-tuning History ==================
 plt.figure(figsize=(12, 6))
@@ -216,9 +216,9 @@ plt.xlabel("Epochs")
 plt.ylabel("Accuracy / Loss")
 plt.legend()
 plt.grid()
-plt.savefig("plots/vgg19_fine_tuning_history.png")
+plt.savefig("PRODUCTION/Task_A/training/vgg19_fine_tuning_history.png")
 
 
 # ================== Save Final Model ==================
-model.save("models/vgg19_final_epoch.h5")
+model.save("PRODUCTION/models/vgg19_final_epoch.h5")
 print("✅ Final model saved as models/vgg19_final_epoch.h5")
