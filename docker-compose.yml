@@ -1,0 +1,19 @@
+# ================= docker-compose.yml =================
+version: "3.9"
+services:
+  facecom:
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+    container_name: facecom_gpu
+    volumes:
+      - .:/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    command: python PRODUCTION/Task_A/inference/inference_vgg19_updated.py
