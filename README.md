@@ -139,10 +139,10 @@ This project addresses two core computer vision tasks:
 ## 📊 Results
 
 - **Gender Classification:**  
-    - Accuracy: ~97% (see `vgg19_training_logs.txt`)
+    - Accuracy: ~97% (see [vgg19_training_logs.txt](PRODUCTION/Task_A/training/vgg19_training_logs.txt)
     - Balanced precision/recall for both genders.
 - **Face Verification:**  
-    - Accuracy: ~96% (see `tripletTrainingLogs.txt`)
+    - Accuracy: ~96% (see [tripletTrainingLogs.txt](PRODUCTION/Task_B/training/tripletTrainingLogs.txt))
     - High precision/recall for identity matching.
 
 ---
