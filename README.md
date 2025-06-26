@@ -39,6 +39,7 @@ This project addresses two core computer vision tasks:
     - Handles class imbalance (more male images than female).
     - Auto-threshold tuning for optimal F1 score.
     - Grad-CAM for model explainability.
+    - **Visual Explainability:** Uses Grad-CAM to highlight which regions of the face the model focuses on to determine gender, displaying a heatmap overlay. See [PRODUCTION/Task_A/inference/inference_vgg19_updated.py](#file:inference_vgg19_updated.py-context) for implementation details.
 - **Relevant Files:**
     - `PRODUCTION/Task_A/training/train_vgg19_updated.py` — Full training pipeline.
     - `PRODUCTION/Task_A/inference/inference_vgg19_updated.py` — Inference & Grad-CAM.
@@ -122,11 +123,15 @@ This project addresses two core computer vision tasks:
 - **Auto Threshold Tuning:**  
     Finds best probability/distance threshold for optimal F1/accuracy.
 - **Explainability:**  
-    Grad-CAM visualizations for gender model.
+    Grad-CAM visualizations for gender model, showing which parts of the face are being scanned to determine gender using a heatmap.
 - **Production-Ready:**  
     All production models and scripts are in `PRODUCTION/`.
 
 ---
+
+## 📈 GRAD-CAM Result Showcase (Male and Female)
+
+
 
 ## 📊 Results
 
