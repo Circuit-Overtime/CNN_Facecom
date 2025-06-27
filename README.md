@@ -5,7 +5,7 @@ A robust deep learning pipeline for **gender classification** and **face verific
 ![Elixpo_Generated (2)](https://github.com/user-attachments/assets/3e38c081-8576-419b-9503-37adcd2bb9b4)
 
 ---
-
+> All the submission files are under PROUDUCTION and the two Releases with tags `publish101` and `publish102`.
 ## 📂 Repository Structure
 
 ```
